@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/color1"
+    android:textSize="20sp"
+    android:text="@string/color"
+    android:layout_marginTop="12sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+   <EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/etcolor1"
+    android:textSize="20sp"
+    android:hint="@string/color"
+    app:layout_constraintStart_toEndOf="@id/color1"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/color2"
+    android:textSize="20sp"
+    android:text="@string/color_second"
+    android:layout_marginTop="20sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/color1"
+    />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etcolor2"
+        android:textSize="20sp"
+        android:hint="@string/color_second"
+        app:layout_constraintStart_toEndOf="@id/color2"
+        app:layout_constraintTop_toBottomOf="@id/etcolor1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listno"
+        android:textSize="20sp"
+        android:text="@string/number_of_list"
+        android:layout_marginTop="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color2"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etlistno"
+        android:textSize="20sp"
+        android:hint="@string/color_second"
+        app:layout_constraintStart_toEndOf="@id/listno"
+        app:layout_constraintTop_toBottomOf="@id/etcolor2"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/listno"
+        android:text="@string/save"
+        android:id="@+id/btnsave"
+        android:layout_marginTop="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

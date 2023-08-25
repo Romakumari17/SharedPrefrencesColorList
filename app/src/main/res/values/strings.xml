@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SharedPrefrencesColorList</string>
+    <string name="color">color first:</string>
+    <string name="color_second">Color Second</string>
+    <string name="number_of_list">number of list</string>
+    <string name="save">Save</string>
+    <string name="clear">Clear</string>
 </resources>
