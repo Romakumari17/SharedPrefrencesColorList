@@ -3,6 +3,7 @@ package com.romakumari.sharedprefrencescolorlist
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
+import android.graphics.Color
 
 class SharedPref {
     var sharedPref:SharedPreferences?=null
@@ -20,8 +21,8 @@ class SharedPref {
         Editor?.putString(key,value)
         Editor?.commit()
     }
-    fun getString(name:String):String{
-        return sharedPref?.getString(name,"")?:""
+    fun getString(color: Int):String{
+        return sharedPref?.getString(color.toString(),"")?:""
     }
     fun clearPref(){
         Editor?.clear()

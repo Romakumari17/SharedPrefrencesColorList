@@ -1,28 +1,24 @@
 package com.romakumari.sharedprefrencescolorlist
 
 import android.app.Dialog
-import android.app.Person
+
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.SharedPreferences.Editor
-import android.graphics.Color
-import android.graphics.ColorSpace
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.edit
+import com.github.dhaval2404.colorpicker.ColorPickerDialog
+import com.github.dhaval2404.colorpicker.model.ColorShape
 import com.romakumari.sharedprefrencescolorlist.databinding.ActivityMainBinding
 import com.romakumari.sharedprefrencescolorlist.databinding.ColorlayoutBinding
 
 class MainActivity : AppCompatActivity() {
-     lateinit var binding: ActivityMainBinding
-     lateinit var sharedPreferences:SharedPreferences
-     lateinit var editor:SharedPreferences.Editor
-   //  lateinit var dialog:ColorPickerDialog
+    lateinit var binding: ActivityMainBinding
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+    lateinit var colorlist: ArrayList<AppConstant>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,42 +27,51 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences =
             getSharedPreferences(resources.getString(R.string.app_name), Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
-        SingletonObject.sharedPref.getString(AppConstant.name)
+
+        binding.mainActivity=this
+
     }
-        fun FabClick() {
-            var dialog = Dialog(this)
-            var dialogbinding = ColorlayoutBinding.inflate(layoutInflater)
-            dialog.setContentView(R.layout.colorlayout)
-            dialog.getWindow()?.setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-//         Toast.makeText(this,"name",Toast.LENGTH_SHORT).show()
-            binding.fab = !(binding.fab ?: false)
-            dialogbinding.btnsave.setOnClickListener {
-                if (dialogbinding.etcolor1.toString().isNullOrEmpty()) {
-                    dialogbinding.etcolor1.error = "enter color"
-                } else if (dialogbinding.etcolor2.toString().isNullOrEmpty()) {
-                    dialogbinding.etcolor2.error = "enter color"
 
-                } else {
-                    dialogbinding.etcolor1.setOnContextClickListener {
-                                
-                        }
-                    }
-
-
-                    }
-
-                    }
-
+    fun FabClick() {
+        var dialog = Dialog(this)
+        var dialogbinding = ColorlayoutBinding.inflate(layoutInflater)
+        dialogbinding.mainActivity=this
+        dialog.setContentView(dialogbinding.root)
+        dialog.getWindow()?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+            dialog.show()
 
                 }
-            }
-            fun ClearClick() {
 
+    fun ClearClick() {
+
+    }
+    fun SaveClick(){
+
+    }
+    fun SaveColor(type:Int){
+        ColorPickerDialog
+            .Builder(this)
+            .setTitle("pick color")
+            .setColorShape(ColorShape.SQAURE)
+            .setDefaultColor(R.color.white)
+            .setColorListener { color, colorHex ->
+                System.out.println("color $color colorHex $colorHex")
             }
-        }
+            .show()
+        SingletonObject.sharedPref.getString(1)
+        SingletonObject.sharedPref.getString(2)
+
+        
+
+    }
+   fun Savenumber(){
+
+   }
+
+}
 
 
 

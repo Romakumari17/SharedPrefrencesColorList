@@ -1,8 +1,13 @@
 package com.romakumari.sharedprefrencescolorlist
 
+import android.graphics.Color
+import android.graphics.ColorSpace
+
 class AppConstant {
     companion object{
-        var name:String="name"
-        var Rollno:String="Rollno"
+        var color:Int=0
+
+
+
+        }
     }
-}
