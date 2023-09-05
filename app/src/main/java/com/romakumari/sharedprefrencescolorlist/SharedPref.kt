@@ -20,12 +20,23 @@ class SharedPref {
     fun savingString(key:String,value:String){
         Editor?.putString(key,value)
         Editor?.commit()
+        Editor?.apply()
+
     }
-    fun getString(color: Int):String{
-        return sharedPref?.getString(color.toString(),"")?:""
+    fun getString(color: String):String{
+        return sharedPref?.getString(color,"#ffffff")?:"#ffffff"
+    }
+    fun setInt(key:String,value:Int){
+        Editor?.putInt(key,value)
+        Editor?.commit()
+        Editor?.apply()
+    }
+    fun getInt(color: String):Int{
+        return sharedPref?.getInt(color,0)?:0
     }
     fun clearPref(){
         Editor?.clear()
         Editor?.commit()
+        Editor?.apply()
     }
 }

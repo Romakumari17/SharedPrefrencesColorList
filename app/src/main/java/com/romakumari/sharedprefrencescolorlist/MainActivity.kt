@@ -8,16 +8,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
 import com.romakumari.sharedprefrencescolorlist.databinding.ActivityMainBinding
 import com.romakumari.sharedprefrencescolorlist.databinding.ColorlayoutBinding
+import com.romakumari.sharedprefrencescolorlist.databinding.ColorlistlayoutBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     lateinit var colorlist: ArrayList<AppConstant>
+    lateinit var dialog: Dialog
+    lateinit var dialogBinding: ColorlayoutBinding
+    lateinit var listAdapter: ListAdapter
+    var color1 = "#ffffff"
+    var color2 = "#ffffff"
+    var number = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,31 +35,64 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences =
             getSharedPreferences(resources.getString(R.string.app_name), Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
-
-        binding.mainActivity=this
+        color1 = SingletonObject.sharedPref.getString(AppConstant.color) ?: "#ffffff"
+        color2 = SingletonObject.sharedPref.getString(AppConstant.color2) ?: "#ffffff"
+        number = SingletonObject.sharedPref.getInt(AppConstant.number) ?: 0
+        listAdapter = ListAdapter(number, color1, color2)
+        binding.listView.adapter = listAdapter
+        binding.mainActivity = this
 
     }
 
     fun FabClick() {
-        var dialog = Dialog(this)
-        var dialogbinding = ColorlayoutBinding.inflate(layoutInflater)
-        dialogbinding.mainActivity=this
-        dialog.setContentView(dialogbinding.root)
+        dialog = Dialog(this)
+        dialogBinding = ColorlayoutBinding.inflate(layoutInflater)
+        dialogBinding.mainActivity = this
+        dialog.setContentView(dialogBinding.root)
         dialog.getWindow()?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-            dialog.show()
+        dialogBinding.etcolor1.setText(color1)
+        dialogBinding.etcolor2.setText(color2)
+        dialogBinding.etlistno.setText(number.toString())
+        dialog.show()
 
-                }
+    }
 
     fun ClearClick() {
+        SingletonObject.sharedPref.clearPref()
+        color1 = SingletonObject.sharedPref.getString(AppConstant.color)
+        color2=SingletonObject.sharedPref.getString(AppConstant.color2)
+        number=SingletonObject.sharedPref.getInt(AppConstant.number)
+        listAdapter.notifyDataSetChanged()
 
     }
-    fun SaveClick(){
+
+    fun SaveClick() {
+        //validations
+        SingletonObject.sharedPref.savingString(
+            AppConstant.color,
+            dialogBinding.etcolor1.text.toString()
+        )
+        SingletonObject.sharedPref.savingString(
+            AppConstant.color2,
+            dialogBinding.etcolor2.text.toString()
+        )
+        SingletonObject.sharedPref.setInt(
+            AppConstant.number,
+            dialogBinding.etlistno.text.toString().toInt()
+        )
+        color1 =  dialogBinding.etcolor1.text.toString()
+        color2 =  dialogBinding.etcolor2.text.toString()
+        number =  dialogBinding.etlistno.text.toString().toInt()
+        listAdapter.notifyDataSetChanged()
+
+        dialog.dismiss()
 
     }
-    fun SaveColor(type:Int){
+
+    fun SaveColor(type: Int) {
         ColorPickerDialog
             .Builder(this)
             .setTitle("pick color")
@@ -59,17 +100,16 @@ class MainActivity : AppCompatActivity() {
             .setDefaultColor(R.color.white)
             .setColorListener { color, colorHex ->
                 System.out.println("color $color colorHex $colorHex")
+                if (type == 1) {
+                    dialogBinding.etcolor1.setText(colorHex)
+                } else if (type == 2) {
+                    dialogBinding.etcolor2.setText(colorHex)
+                }
             }
             .show()
-        SingletonObject.sharedPref.getString(1)
-        SingletonObject.sharedPref.getString(2)
-
-        
-
     }
-   fun Savenumber(){
 
-   }
+
 
 }
 
