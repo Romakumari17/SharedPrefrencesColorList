@@ -10,7 +10,17 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.toColor
 
-class ListAdapter (var colorlist:Int,var color1: String, var color2: String ): BaseAdapter(){
+class ListAdapter ( ): BaseAdapter(){
+    var colorlist:Int =0
+    var color1: String = "#ffffff"
+    var color2: String = "#ffffff"
+
+    fun updateValues(colorList: Int, color1: String, color2: String){
+        this.color2 = color2
+        this.color1 = color1
+        this.colorlist = colorList
+        notifyDataSetChanged()
+    }
     override fun getCount(): Int {
         return colorlist
     }
@@ -36,12 +46,7 @@ class ListAdapter (var colorlist:Int,var color1: String, var color2: String ): B
            cl.setText(color2)
 
        }
-
         return view
     }
-
-
-
-
 
 }

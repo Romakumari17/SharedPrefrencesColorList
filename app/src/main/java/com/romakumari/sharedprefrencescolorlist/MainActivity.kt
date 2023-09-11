@@ -38,7 +38,9 @@ class MainActivity : AppCompatActivity() {
         color1 = SingletonObject.sharedPref.getString(AppConstant.color) ?: "#ffffff"
         color2 = SingletonObject.sharedPref.getString(AppConstant.color2) ?: "#ffffff"
         number = SingletonObject.sharedPref.getInt(AppConstant.number) ?: 0
-        listAdapter = ListAdapter(number, color1, color2)
+        listAdapter = ListAdapter()
+        listAdapter.updateValues(color1 = color1, color2 = color2, colorList = number)
+
         binding.listView.adapter = listAdapter
         binding.mainActivity = this
 
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         color1 = SingletonObject.sharedPref.getString(AppConstant.color)
         color2=SingletonObject.sharedPref.getString(AppConstant.color2)
         number=SingletonObject.sharedPref.getInt(AppConstant.number)
-        listAdapter.notifyDataSetChanged()
+        listAdapter.updateValues(color1 = color1, color2 = color2, colorList = number)
 
     }
 
@@ -86,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         color1 =  dialogBinding.etcolor1.text.toString()
         color2 =  dialogBinding.etcolor2.text.toString()
         number =  dialogBinding.etlistno.text.toString().toInt()
-        listAdapter.notifyDataSetChanged()
+        listAdapter.updateValues(color1 = color1, color2 = color2, colorList = number)
 
         dialog.dismiss()
 

@@ -10,9 +10,6 @@
      name="savecolor"
      type="Boolean" />
 
-   <variable
-       name="savenumber"
-       type="Boolean" />
    <import type="android.view.View"/>
   </data>
  <LinearLayout
