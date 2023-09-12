@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
-    lateinit var colorlist: ArrayList<AppConstant>
     lateinit var dialog: Dialog
     lateinit var dialogBinding: ColorlayoutBinding
     lateinit var listAdapter: ListAdapter
